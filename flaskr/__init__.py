@@ -31,13 +31,13 @@ def create_app(test_config=None):
         response.headers['Content-Type'] = 'application/json'
         return response
 
-    @app.get('/borrowers')
+    @app.get('/api/v1/borrowers')
     def borrowers():
         db = get_db()
         borrowers = db.execute('SELECT * FROM borrower').fetchall()
         return query_to_json_response(borrowers)
 
-    @app.get('/borrowers/<int:borrower_id>/invoices')
+    @app.get('/api/v1/borrowers/<int:borrower_id>/invoices')
     def borrower_invoices(borrower_id):
         db = get_db()
         invoices = db.execute(
@@ -45,7 +45,7 @@ def create_app(test_config=None):
         ).fetchall()
         return query_to_json_response(invoices)
 
-    @app.put('/borrowers/<int:borrower_id>/invoice/<int:invoice_id>')
+    @app.put('/api/v1/invoice/<int:invoice_id>')
     def update_invoice(borrower_id):
         return 'Put invoice'
 
