@@ -2,6 +2,8 @@
 
 Have fun playing around with the various state transitions for borrower invoices.
 
+![Demo](app.gif)
+
 ## Setup
 
 NOTE: Unless otherwise specified, commands should be run from the same directory in which this README is located.
