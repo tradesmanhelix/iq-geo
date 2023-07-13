@@ -24,7 +24,7 @@ def update_invoice(invoice_id):
         abort_with_message("Invoice id {invoice_id} doesn't exist.", 404)
 
     data = request.get_json()
-    new_state = data.get('invoice').get('status')
+    new_state = data.get('invoice').get('state')
 
     if not new_state:
         abort_with_message("Invoice state is required.", 400)
