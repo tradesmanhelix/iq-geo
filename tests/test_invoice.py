@@ -21,3 +21,19 @@ def test_put_invoice(app, client):
 
         assert response.status_code == 200
         assert updated['state'] == new_status
+
+def test_prevent_invalid_state_transition(app, client):
+    with app.app_context(), app.test_request_context():
+        tested_id = 1
+        new_status = 'closed'
+        data = { 'invoice': { 'status': new_status }}
+        headers = {'Content-Type': 'application/json'}
+
+        response = client.put(url_for('invoice.update_invoice', invoice_id=tested_id), data=json.dumps(data), headers=headers)
+
+        invoice = get_db().execute(
+            'SELECT * FROM invoice WHERE id = ?', (tested_id,)
+        ).fetchone()
+
+        assert response.status_code == 400
+        assert invoice['state'] != new_status
