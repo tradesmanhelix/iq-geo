@@ -30,7 +30,7 @@ def init_db():
 def seed_db():
     db = get_db()
 
-    with current_app.open_resource('./db/dev_seed.sql') as f:
+    with current_app.open_resource('./db/seed.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
 @click.command('init-db')
